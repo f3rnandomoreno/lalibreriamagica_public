@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Button, Typography, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTheme } from "@mui/material/styles";
+import { useHistory } from "react-router-dom";
 
 const ImageContainer = styled("div")({
   display: "flex",
