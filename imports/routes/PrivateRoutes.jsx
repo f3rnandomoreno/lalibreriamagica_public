@@ -1,23 +1,22 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-// Si decides utilizar las páginas y el contexto en el futuro, descomenta las importaciones
+import { Login } from "../ui/user/Login";
+import { Home } from "../ui/pages/Home";
 // import the pages
 
-// import the context
+// // import the context
 // import { AuthProvider } from "../context/AuthContext";
 
 export const PrivateRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<div>test</div>} />
+        <Route exact path="/" element={Home} />
         <Route path="*" element={<div>test not found</div>} />
-        {/* Si decides utilizar estas rutas en el futuro, descomenta las siguientes líneas y asegúrate de importar los componentes correspondientes */}
-        {/* <Route path="/login" element={<Login />} /> */}
-        {/* <PrivateRoute path="/profile" element={<Profile />} /> */}
-        {/* <Route path="/register" element={<Register />} /> */}
-        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="/login" component={Login} />
+        {/* <PrivateRoute path="/profile" component={Profile} /> */}
+        {/* <Route path="/register" component={Register} /> */}
+        {/* <Route path="*" component={NotFound} /> */}
       </Routes>
     </BrowserRouter>
   );
