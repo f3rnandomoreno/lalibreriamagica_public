@@ -1,0 +1,10 @@
+- sepparate social login functions to avoid error in facebook one
+- Connect login with normal users FE with BE
+- Add terms and conditions
+- Manage success login
+- Manage error login
+- Create Routes
+- Create signup component
+x Implement continuar of login
+x Create login for normal users
+x Create login for google
