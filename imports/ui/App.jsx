@@ -1,9 +1,9 @@
 import React from "react";
-import { PrivateRoutes } from "../routes/PrivateRoutes";
+import { AppRoutes } from "../routes/AppRoutes";
 import Home from "./pages/Home";
 
 export const App = () => (
   <div>
-    <PrivateRoutes />
+    <AppRoutes />
   </div>
 );
