@@ -11,9 +11,9 @@ export const PrivateRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={Home} />
+        <Route exact path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<div>test not found</div>} />
-        <Route path="/login" component={Login} />
         {/* <PrivateRoute path="/profile" component={Profile} /> */}
         {/* <Route path="/register" component={Register} /> */}
         {/* <Route path="*" component={NotFound} /> */}
