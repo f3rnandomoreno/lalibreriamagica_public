@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Button, Typography, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import { useTheme } from "@mui/material/styles";
-import { useHistory } from "react-router-dom";
+import { useNavigation } from "react-router-dom";
 
 const ImageContainer = styled("div")({
   display: "flex",
@@ -37,7 +37,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 
 const Home = () => {
   const theme = useTheme();
-  const history = useHistory();
+  const navigation = useNavigation();
 
   return (
     <Container
@@ -75,7 +75,7 @@ const Home = () => {
             variant="contained"
             onClick={() => {
               /* Redireccionar a login */
-              history.push("/login");
+              navigation.navigate("/login");
             }}
           >
             Iniciar sesión
@@ -85,7 +85,7 @@ const Home = () => {
             variant="contained"
             onClick={() => {
               /* Redireccionar a sign up */
-              history.push("/register");
+              navigation.navigate("/register");
             }}
           >
             Regístrate
