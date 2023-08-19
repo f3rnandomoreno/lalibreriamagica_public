@@ -36,6 +36,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 
 const Home = () => {
   const theme = useTheme();
+  const history = useHistory();
 
   return (
     <Container
@@ -73,6 +74,7 @@ const Home = () => {
             variant="contained"
             onClick={() => {
               /* Redireccionar a login */
+              history.push("/login");
             }}
           >
             Iniciar sesión
@@ -82,6 +84,7 @@ const Home = () => {
             variant="contained"
             onClick={() => {
               /* Redireccionar a sign up */
+              history.push("/register");
             }}
           >
             Regístrate
