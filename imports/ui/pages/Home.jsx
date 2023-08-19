@@ -95,7 +95,7 @@ import React from "react";
 // };
 
 const Home = () => {
-  return <div>Test</div>;
+  return <div>Hola</div>;
 };
 
 export default Home;
