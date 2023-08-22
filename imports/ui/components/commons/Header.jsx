@@ -1,55 +1,26 @@
-import * as React from 'react';
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import InputBase from '@mui/material/InputBase';
-import { styled, alpha } from '@mui/material/styles';
-
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-}));
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import Button from '@mui/material/Button';
 
 export default function Header() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -58,32 +29,55 @@ export default function Header() {
             size="large"
             edge="start"
             color="inherit"
-            aria-label="open drawer"
+            aria-label="menu"
+            onClick={handleMenu}
             sx={{ mr: 2 }}
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+          <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            onClick={handleClose}
+            PaperProps={{
+              elevation: 0,
+              sx: {
+                overflow: 'visible',
+                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                mt: 1.5,
+                '& .MuiAvatar-root': {
+                  width: 32,
+                  height: 32,
+                  ml: -0.5,
+                  mr: 1,
+                },
+                '&:before': {
+                  content: '""',
+                  display: 'block',
+                  position: 'absolute',
+                  top: 0,
+                  right: 14,
+                  width: 10,
+                  height: 10,
+                  bgcolor: 'background.paper',
+                  transform: 'translateY(-50%) rotate(45deg)',
+                  zIndex: 0,
+                },
+              },
+            }}
+            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
+            <MenuItem onClick={handleClose}>Inicio</MenuItem>
+            <MenuItem onClick={handleClose}>Salas de Lectura</MenuItem>
+            <MenuItem onClick={handleClose}>Perfil</MenuItem>
+            <MenuItem onClick={handleClose}>Crear Sala</MenuItem>
+          </Menu>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             La Librería Mágica
           </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Buscar…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
-          <Button color="inherit">Inicio</Button>
-          <Button color="inherit">Salas de Lectura</Button>
-          <Button color="inherit">Perfil</Button>
-          <Button variant="outlined" color="inherit">Crear Sala</Button>
+          <Button color="inherit" variant="outlined">Iniciar Sesión</Button>
         </Toolbar>
       </AppBar>
     </Box>
