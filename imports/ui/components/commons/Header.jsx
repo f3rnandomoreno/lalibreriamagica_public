@@ -1,5 +1,5 @@
 import React from 'react';
-import { SwipeableDrawer, List, ListItem, ListItemIcon, ListItemText, IconButton, AppBar, Toolbar, Typography, Button } from '@mui/material';
+import { SwipeableDrawer, List, ListItem, ListItemIcon, ListItemText, IconButton, AppBar, Toolbar, Typography, Divider } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
@@ -7,9 +7,12 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import GroupIcon from '@mui/icons-material/Group';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { Meteor } from 'meteor/meteor';
 
 export default function Header() {
   const [open, setOpen] = React.useState(false);
+  const user = Meteor.user(); // Obtener el usuario actual
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -17,6 +20,10 @@ export default function Header() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleLogout = () => {
+    Meteor.logout(); // Cerrar sesión con Meteor
   };
 
   const iOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -31,7 +38,6 @@ export default function Header() {
           <Typography variant="h6">
             La Librería Mágica
           </Typography>
-          <Button color="inherit" variant="outlined">Iniciar Sesión</Button>
         </Toolbar>
       </AppBar>
       <SwipeableDrawer
@@ -80,6 +86,17 @@ export default function Header() {
             <ListItemText primary="Notificaciones" />
           </ListItem>
         </List>
+        {user && (
+          <div style={{ marginTop: 'auto' }}>
+            <Divider />
+            <ListItem button onClick={handleLogout}>
+              <ListItemIcon>
+                <ExitToAppIcon />
+              </ListItemIcon>
+              <ListItemText primary="Cerrar Sesión" />
+            </ListItem>
+          </div>
+        )}
       </SwipeableDrawer>
       {/* Resto del contenido */}
     </div>
