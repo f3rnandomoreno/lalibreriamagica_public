@@ -186,7 +186,7 @@ const Register = () => {
           <Typography variant="body2" color="textPrimary" sx={{ mr: 1 }}>
             ¿Ya tienes cuenta?
           </Typography>
-          <Link href="#" variant="body2">
+          <Link href="/login" variant="body2">
             Inicia sesión
           </Link>
         </Box>
