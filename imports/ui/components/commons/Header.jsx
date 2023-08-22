@@ -1,10 +1,12 @@
 import React from 'react';
-import { SwipeableDrawer, List, ListItem, ListItemIcon, ListItemText, IconButton, AppBar, Toolbar, Typography } from '@mui/material';
+import { SwipeableDrawer, List, ListItem, ListItemIcon, ListItemText, IconButton, AppBar, Toolbar, Typography, Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Button from '@mui/material/Button';
+import GroupIcon from '@mui/icons-material/Group';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 export default function Header() {
   const [open, setOpen] = React.useState(false);
@@ -51,9 +53,27 @@ export default function Header() {
           </ListItem>
           <ListItem button>
             <ListItemIcon>
+              <AddBoxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Crear Sala" />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
               <AccountCircleIcon />
             </ListItemIcon>
             <ListItemText primary="Perfil" />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <GroupIcon />
+            </ListItemIcon>
+            <ListItemText primary="Amigos" />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <NotificationsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Notificaciones" />
           </ListItem>
         </List>
       </SwipeableDrawer>
