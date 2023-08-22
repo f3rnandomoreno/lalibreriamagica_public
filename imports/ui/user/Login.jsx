@@ -113,7 +113,7 @@ const Login = () => {
       <Typography component="h1" variant="h5" color="textPrimary">
         {step === "email" ? "Bienvenido de nuevo" : "Introduce tu contraseña"}
       </Typography>
-      <LoginForm noValidate onSubmit={handleLogin}>
+      <LoginForm noValidate onSubmit={handleMeteorLogin}>
         <TextField
           variant="outlined"
           margin="normal"
@@ -178,7 +178,6 @@ const Login = () => {
           fullWidth
           variant="contained"
           color="primary"
-          onClick={handleMeteorLogin}
           sx={{ mt: 3, mb: 1 }}
         >
           Continuar
