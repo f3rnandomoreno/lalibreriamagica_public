@@ -59,13 +59,13 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const handleMeteorLogin = (e) => {
-    e.preventDefault();
-    if (!validateEmail(email)) {
-      setEmailError(true);
-      return;
-    }
-
+  const handleLogin = (e) => {
+  e.preventDefault();
+  if (!validateEmail(email)) {
+    setEmailError(true);
+    return;
+  }
+  if (step === "password") {
     Meteor.loginWithPassword(email, password, (err) => {
       if (err) {
         alert(`Login failed: ${err.message}`);
@@ -74,7 +74,10 @@ const Login = () => {
         // Aquí puedes redirigir al usuario a la página principal o realizar cualquier otra acción post-login
       }
     });
+  } else {
+    setStep("password");
   }
+};
 
   const handleEditEmail = () => {
     setStep("email");
@@ -113,7 +116,7 @@ const Login = () => {
       <Typography component="h1" variant="h5" color="textPrimary">
         {step === "email" ? "Bienvenido de nuevo" : "Introduce tu contraseña"}
       </Typography>
-      <LoginForm noValidate onSubmit={handleMeteorLogin}>
+      <LoginForm noValidate onSubmit={handleLogin}>
         <TextField
           variant="outlined"
           margin="normal"
