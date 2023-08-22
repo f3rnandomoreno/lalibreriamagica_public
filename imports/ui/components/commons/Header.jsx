@@ -19,6 +19,8 @@ export default function Header() {
     setOpen(false);
   };
 
+  const iOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
+
   return (
     <div>
       <AppBar position="static">
@@ -37,6 +39,8 @@ export default function Header() {
         open={open}
         onClose={handleDrawerClose}
         onOpen={handleDrawerOpen}
+        disableBackdropTransition={!iOS}
+        disableDiscovery={iOS}
       >
         <List>
           <ListItem button>
