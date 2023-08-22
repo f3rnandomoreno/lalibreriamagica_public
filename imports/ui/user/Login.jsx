@@ -59,14 +59,22 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const handleLogin = (e) => {
+  const handleMeteorLogin = (e) => {
     e.preventDefault();
     if (!validateEmail(email)) {
       setEmailError(true);
       return;
     }
-    setStep("password");
-  };
+
+    Meteor.loginWithPassword(email, password, (err) => {
+      if (err) {
+        alert(`Login failed: ${err.message}`);
+      } else {
+        alert(`Login success`);
+        // Aquí puedes redirigir al usuario a la página principal o realizar cualquier otra acción post-login
+      }
+    });
+  }
 
   const handleEditEmail = () => {
     setStep("email");
@@ -170,6 +178,7 @@ const Login = () => {
           fullWidth
           variant="contained"
           color="primary"
+          onClick={handleMeteorLogin}
           sx={{ mt: 3, mb: 1 }}
         >
           Continuar
