@@ -1,41 +1,91 @@
-import * as React from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  InputBase,
-  IconButton,
-} from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import InputBase from '@mui/material/InputBase';
+import { styled, alpha } from '@mui/material/styles';
+
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(3),
+    width: 'auto',
+  },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
+  },
+}));
 
 export default function Header() {
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          La Librería Mágica
-        </Typography>
-        <InputBase
-          placeholder="Buscar…"
-          sx={{
-            color: "inherit",
-            padding: "0 1rem",
-            width: "20ch",
-            transition: (theme) => theme.transitions.create("width"),
-            "&:focus": { width: "30ch" },
-          }}
-        />
-        <IconButton type="submit" aria-label="search">
-          <SearchIcon />
-        </IconButton>
-        <Button color="inherit">Inicio</Button>
-        <Button color="inherit">Salas de Lectura</Button>
-        <Button color="inherit">Perfil</Button>
-        <Button color="inherit" variant="outlined">
-          Crear Sala
-        </Button>
-      </Toolbar>
-    </AppBar>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+          >
+            La Librería Mágica
+          </Typography>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Buscar…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
+          <Button color="inherit">Inicio</Button>
+          <Button color="inherit">Salas de Lectura</Button>
+          <Button color="inherit">Perfil</Button>
+          <Button variant="outlined" color="inherit">Crear Sala</Button>
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 }
