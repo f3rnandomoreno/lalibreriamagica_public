@@ -1,5 +1,5 @@
 import React from 'react';
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton, AppBar, Toolbar, Typography } from '@mui/material';
+import { SwipeableDrawer, List, ListItem, ListItemIcon, ListItemText, IconButton, AppBar, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
@@ -30,10 +30,12 @@ export default function Header() {
           <Button color="inherit" variant="outlined">Iniciar Sesión</Button>
         </Toolbar>
       </AppBar>
-      <Drawer variant="persistent" anchor="left" open={open}>
-        <IconButton onClick={handleDrawerClose}>
-          <MenuIcon />
-        </IconButton>
+      <SwipeableDrawer
+        anchor="left"
+        open={open}
+        onClose={handleDrawerClose}
+        onOpen={handleDrawerOpen}
+      >
         <List>
           <ListItem button>
             <ListItemIcon>
@@ -54,7 +56,7 @@ export default function Header() {
             <ListItemText primary="Perfil" />
           </ListItem>
         </List>
-      </Drawer>
+      </SwipeableDrawer>
       {/* Resto del contenido */}
     </div>
   );
