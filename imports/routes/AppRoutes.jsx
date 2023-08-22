@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import Header from '../components/commons/Header'; // Asegúrate de importar el componente Header
+import Header from '../ui/components/commons/Header';
 import Home from '../ui/pages/Home';
 import Login from '../ui/user/Login';
 import Register from '../ui/user/Register';
