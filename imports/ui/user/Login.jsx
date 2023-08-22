@@ -182,7 +182,7 @@ const Login = () => {
           <Typography variant="body2" color="textPrimary" sx={{ mr: 1 }}>
             ¿No tienes cuenta?
           </Typography>
-          <Link href="#" variant="body2">
+          <Link href="/register" variant="body2">
             Regístrate
           </Link>
         </Box>
