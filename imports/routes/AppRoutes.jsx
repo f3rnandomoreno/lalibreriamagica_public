@@ -16,8 +16,8 @@ export const AppRoutes = () => {
       {userIsLoggedIn && <Header />} {/* Mostrar el encabezado solo si el usuario está autenticado */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        {!userIsLoggedIn && <Route path="/login" element={<Login />} />}
+        {!userIsLoggedIn && <Route path="/register" element={<Register />} />}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
