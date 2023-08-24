@@ -18,7 +18,6 @@ import {
 } from "@mui/icons-material";
 import { styled } from "@mui/system";
 import Logo from "../components/commons/Logo";
-import { useNavigate } from "react-router-dom"; // Importa useNavigate
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   display: "flex",
@@ -46,7 +45,6 @@ const Register = () => {
   const [step, setStep] = useState("email");
   const [emailError, setEmailError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate(); // Usa useNavigate
 
   const validateEmail = (email) => {
     return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
@@ -78,7 +76,6 @@ const Register = () => {
           alert(err.reason);
         } else {
           alert("Registration success");
-          navigate('/'); // Redirige al usuario
         }
       });
     } else {
@@ -120,7 +117,108 @@ const Register = () => {
         {step === "email" ? "Registra tu cuenta" : "Registra tu cuenta"}
       </Typography>
       <RegisterForm noValidate onSubmit={handleRegister}>
-        {/* Resto del formulario */}
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="Dirección de correo"
+          name="email"
+          autoComplete="email"
+          autoFocus
+          value={email}
+          onChange={handleEmailChange}
+          error={emailError}
+          helperText={emailError && "Por favor introduce un correo válido"}
+          InputProps={{
+            readOnly: step === "password",
+            endAdornment: step === "password" && (
+              <InputAdornment position="end">
+                <IconButton edge="end" onClick={handleEditEmail}>
+                  <EditIcon />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+        {step === "password" && (
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="password"
+            label="Contraseña"
+            type={showPassword ? "text" : "password"}
+            name="password"
+            value={password}
+            onChange={handlePasswordChange}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    edge="end"
+                    aria-label="toggle password visibility"
+                    onClick={handlePasswordToggle}
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+        )}
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          sx={{ mt: 3, mb: 1 }}
+        >
+          Continuar
+        </Button>
+        <Box
+          textAlign="center"
+          marginTop={1}
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
+          <Typography variant="body2" color="textPrimary" sx={{ mr: 1 }}>
+            ¿Ya tienes cuenta?
+          </Typography>
+          <Link href="/login" variant="body2">
+            Inicia sesión
+          </Link>
+        </Box>
+        {step === "email" && (
+          <>
+            <Typography
+              variant="body1"
+              align="center"
+              color="textPrimary"
+              sx={{ mt: 1 }}
+            >
+              {" "}
+              O
+            </Typography>
+            <SocialButton
+              variant="outlined"
+              startIcon={<FacebookIcon />}
+              fullWidth
+              onClick={handleFacebookLogin}
+            >
+              Continuar con Facebook
+            </SocialButton>
+            <SocialButton
+              variant="outlined"
+              startIcon={<GoogleIcon />}
+              fullWidth
+              onClick={handleGoogleLogin}
+            >
+              Continuar con Google
+            </SocialButton>
+          </>
+        )}
       </RegisterForm>
     </StyledContainer>
   );
