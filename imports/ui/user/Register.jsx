@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Meteor } from "meteor/meteor";
 import { IconButton, InputAdornment } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -45,6 +46,7 @@ const Register = () => {
   const [step, setStep] = useState("email");
   const [emailError, setEmailError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
     return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
@@ -75,7 +77,7 @@ const Register = () => {
         if (err) {
           alert(err.reason);
         } else {
-          alert("Registration success");
+          navigate("/");
         }
       });
     } else {
@@ -94,7 +96,7 @@ const Register = () => {
         if (err) {
           alert(`Facebook login fails`);
         } else {
-          alert(`Facebook login success`);
+          navigate("/");
         }
       }
     );
@@ -105,7 +107,7 @@ const Register = () => {
       if (err) {
         alert(`Google login fails`);
       } else {
-        alert(`Google login success`);
+        navigate("/");
       }
     });
   };

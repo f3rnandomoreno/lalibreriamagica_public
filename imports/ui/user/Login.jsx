@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Meteor } from "meteor/meteor";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { IconButton, InputAdornment } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -73,7 +73,7 @@ const Login = () => {
           alert(`Login failed: ${err.message}`);
         } else {
           // Redirigir al usuario a la página principal
-          navigate('/');
+          navigate("/");
         }
       });
     } else {
@@ -96,7 +96,7 @@ const Login = () => {
         if (err) {
           alert(`Facebook login fails`);
         } else {
-          alert(`Facebook login success`);
+          navigate("/");
         }
       }
     );
@@ -107,7 +107,7 @@ const Login = () => {
       if (err) {
         alert(`Google login fails`);
       } else {
-        alert(`Google login success`);
+        navigate("/");
       }
     });
   };
