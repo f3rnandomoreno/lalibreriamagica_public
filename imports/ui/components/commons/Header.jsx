@@ -1,14 +1,25 @@
-import React from 'react';
-import { SwipeableDrawer, List, ListItem, ListItemIcon, ListItemText, IconButton, AppBar, Toolbar, Typography, Divider } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import HomeIcon from '@mui/icons-material/Home';
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import GroupIcon from '@mui/icons-material/Group';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import AddBoxIcon from '@mui/icons-material/AddBox';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { Meteor } from 'meteor/meteor';
+import React from "react";
+import {
+  SwipeableDrawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  IconButton,
+  AppBar,
+  Toolbar,
+  Typography,
+  Divider,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import GroupIcon from "@mui/icons-material/Group";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import { Meteor } from "meteor/meteor";
 
 export default function Header() {
   const [open, setOpen] = React.useState(false);
@@ -26,18 +37,23 @@ export default function Header() {
     Meteor.logout(); // Cerrar sesión con Meteor
   };
 
-  const iOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const iOS =
+    typeof navigator !== "undefined" &&
+    /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   return (
     <div>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleDrawerOpen}>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={handleDrawerOpen}
+          >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6">
-            La Librería Mágica
-          </Typography>
+          <Typography variant="h6">La Librería Mágica</Typography>
         </Toolbar>
       </AppBar>
       <SwipeableDrawer
@@ -45,8 +61,6 @@ export default function Header() {
         open={open}
         onClose={handleDrawerClose}
         onOpen={handleDrawerOpen}
-        disableBackdropTransition={!iOS}
-        disableDiscovery={iOS}
       >
         <List>
           <ListItem button>
@@ -87,7 +101,7 @@ export default function Header() {
           </ListItem>
         </List>
         {user && (
-          <div style={{ marginTop: 'auto' }}>
+          <div style={{ marginTop: "auto" }}>
             <Divider />
             <ListItem button onClick={handleLogout}>
               <ListItemIcon>
