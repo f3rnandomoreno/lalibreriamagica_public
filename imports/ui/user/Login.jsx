@@ -46,6 +46,8 @@ const Login = () => {
   const [step, setStep] = useState("email");
   const [emailError, setEmailError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [loginError, setLoginError] = useState(null); // Agrega esta línea
+
   const navigate = useNavigate();
 
   const validateEmail = (email) => {
@@ -70,7 +72,7 @@ const Login = () => {
     if (step === "password") {
       Meteor.loginWithPassword(email, password, (err) => {
         if (err) {
-          alert(`Login failed: ${err.message}`);
+          setLoginError(`Login failed: ${err.message}`); // Modifica esta línea
         } else {
           // Redirigir al usuario a la página principal
           navigate("/");
@@ -94,7 +96,7 @@ const Login = () => {
       { requestPermissions: ["public_profile"] },
       (err) => {
         if (err) {
-          alert(`Facebook login fails`);
+          setLoginError(`Facebook Login failed: ${err.message}`); // Modifica esta línea
         } else {
           navigate("/");
         }
@@ -105,7 +107,7 @@ const Login = () => {
   const handleGoogleLogin = () => {
     Meteor.loginWithGoogle((err) => {
       if (err) {
-        alert(`Google login fails`);
+        setLoginError(`Google Login failed: ${err.message}`); // Modifica esta línea
       } else {
         navigate("/");
       }
@@ -118,6 +120,7 @@ const Login = () => {
       <Typography component="h1" variant="h5" color="textPrimary">
         {step === "email" ? "Bienvenido de nuevo" : "Introduce tu contraseña"}
       </Typography>
+      {loginError && <Alert severity="error">{loginError}</Alert>}
       <LoginForm noValidate onSubmit={handleLogin}>
         <TextField
           variant="outlined"
