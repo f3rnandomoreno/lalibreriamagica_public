@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Meteor } from "meteor/meteor";
+import { useNavigate } from 'react-router-dom';
 import { IconButton, InputAdornment } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -45,6 +46,7 @@ const Login = () => {
   const [step, setStep] = useState("email");
   const [emailError, setEmailError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
     return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
@@ -60,24 +62,24 @@ const Login = () => {
   };
 
   const handleLogin = (e) => {
-  e.preventDefault();
-  if (!validateEmail(email)) {
-    setEmailError(true);
-    return;
-  }
-  if (step === "password") {
-    Meteor.loginWithPassword(email, password, (err) => {
-      if (err) {
-        alert(`Login failed: ${err.message}`);
-      } else {
-        alert(`Login success`);
-        // Aquí puedes redirigir al usuario a la página principal o realizar cualquier otra acción post-login
-      }
-    });
-  } else {
-    setStep("password");
-  }
-};
+    e.preventDefault();
+    if (!validateEmail(email)) {
+      setEmailError(true);
+      return;
+    }
+    if (step === "password") {
+      Meteor.loginWithPassword(email, password, (err) => {
+        if (err) {
+          alert(`Login failed: ${err.message}`);
+        } else {
+          // Redirigir al usuario a la página principal
+          navigate('/');
+        }
+      });
+    } else {
+      setStep("password");
+    }
+  };
 
   const handleEditEmail = () => {
     setStep("email");
