@@ -11,6 +11,27 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 
+import NetflixCarousel from "../components/NetflixCarousel";
+// Dummy data for Netflix-style carousel
+const carouselBooks = [
+  { id: 1, title: "Harry Potter", cover: "https://via.placeholder.com/150" },
+  {
+    id: 2,
+    title: "El Señor de los Anillos",
+    cover: "https://via.placeholder.com/150",
+  },
+  { id: 3, title: "La Odisea", cover: "https://via.placeholder.com/150" },
+  { id: 4, title: "La Iliada", cover: "https://via.placeholder.com/150" },
+  { id: 5, title: "Don Quijote", cover: "https://via.placeholder.com/150" },
+  { id: 6, title: "Divergente", cover: "https://via.placeholder.com/150" },
+  {
+    id: 7,
+    title: "Charlie y la Fabrica de Chocolate",
+    cover: "https://via.placeholder.com/150",
+  },
+  // ... more books for the carousel
+  // TODO: Insert Netflix-style carousel here
+];
 const books = [
   { id: 1, title: "Harry Potter", cover: "https://via.placeholder.com/150" },
   {
@@ -27,12 +48,15 @@ const AuthenticatedHome = () => {
 
   const AuthenticatedHomeContainer = styled(Container)`
     text-align: center;
-    padding: ${theme.spacing(3)}px;
+    padding: ${theme.spacing(4)}px;
+    background-color: ${theme.palette.background.paper};
+    border-radius: ${theme.shape.borderRadius}px;
   `;
 
   const IntroText = styled(Typography)`
-    font-size: 1.2em;
-    margin: ${theme.spacing(2, 0)}px;
+    font-size: 1.4em;
+    margin: ${theme.spacing(3, 0)}px;
+    color: ${theme.palette.text.primary};
   `;
 
   const ActionSection = styled("div")`
@@ -50,7 +74,8 @@ const AuthenticatedHome = () => {
   `;
 
   const BookCard = styled(Card)`
-    max-width: 200px;
+    max-width: 220px;
+    box-shadow: ${theme.shadows[5]};
   `;
 
   const BookCover = styled(CardMedia)`
@@ -69,20 +94,7 @@ const AuthenticatedHome = () => {
       <ActionSection>
         <CreateRoomBtn>Crear Sala de Lectura</CreateRoomBtn>
       </ActionSection>
-      <Grid container spacing={3}>
-        {books.map((book) => (
-          <Grid item key={book.id}>
-            <BookCard>
-              <BookCover image={book.cover} title={book.title} />
-              <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                  {book.title}
-                </Typography>
-              </CardContent>
-            </BookCard>
-          </Grid>
-        ))}
-      </Grid>
+      <NetflixCarousel />
     </AuthenticatedHomeContainer>
   );
 };
